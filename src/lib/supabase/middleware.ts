@@ -29,11 +29,13 @@ export async function updateSession(request: NextRequest) {
       },
 
       // ✅ queue cookies + apply to current response
-      async setAll(cookiesToSet) {
+      // تمت إضافة النوع هنا لحل مشكلة Vercel Type Error
+      async setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
         cookieQueue.push(...cookiesToSet);
 
         cookiesToSet.forEach(({ name, value, options }) => {
-          response.cookies.set(name, value, options);
+          // نستخدم as any لتجنب أي تعارض بسيط في الأنواع بين Next.js و Supabase
+          response.cookies.set(name, value, options as any);
         });
       },
     },
@@ -61,7 +63,7 @@ export async function updateSession(request: NextRequest) {
 
       // ✅ Re-apply queued cookies on redirect response
       cookieQueue.forEach(({ name, value, options }) => {
-        response.cookies.set(name, value, options);
+        response.cookies.set(name, value, options as any);
       });
 
       return response;
@@ -83,7 +85,7 @@ export async function updateSession(request: NextRequest) {
 
       // ✅ Re-apply queued cookies on redirect response
       cookieQueue.forEach(({ name, value, options }) => {
-        response.cookies.set(name, value, options);
+        response.cookies.set(name, value, options as any);
       });
 
       return response;
