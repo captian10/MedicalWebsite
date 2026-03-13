@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ✅ Light */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* ✅ Primary = Professional Red */
+    --primary: 0 72% 45%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    /* ✅ Destructive = same red family */
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+
+    /* ✅ Ring = Red */
+    --ring: 0 72% 45%;
+
+    --radius: 0.75rem;
+
+    --font-inter: "Inter", system-ui, sans-serif;
+    --font-outfit: "Outfit", system-ui, sans-serif;
+  }
+
+  .dark {
+    /* ✅ Dark */
+    --background: 222 60% 5%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 60% 6%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 60% 6%;
+    --popover-foreground: 210 40% 98%;
+
+    /* ✅ Primary = Professional Red (Dark) */
+    --primary: 0 65% 50%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 30% 14%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 30% 14%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 30% 14%;
+    --accent-foreground: 210 40% 98%;
+
+    /* ✅ Destructive = Professional Red (Dark) */
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 30% 14%;
+    --input: 217 30% 14%;
+
+    --ring: 0 65% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-inter);
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-outfit);
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer utilities {
+  /* ✅ Default Red Gradient (Main Theme) */
+  .text-gradient {
+    @apply bg-gradient-to-r from-redPro-700 to-redPro-500 bg-clip-text text-transparent;
+  }
+
+  .bg-gradient-primary {
+    @apply bg-gradient-to-r from-redPro-700 to-redPro-600;
+  }
+
+  .bg-gradient-subtle {
+    @apply bg-gradient-to-br from-redPro-50 via-white to-redPro-100 dark:from-redPro-950/20 dark:via-background dark:to-redPro-950/10;
+  }
+
+  .hero-gradient {
+    @apply bg-gradient-to-br from-redPro-800 via-redPro-700 to-redPro-600;
+  }
+
+  /* ✅ Glass effect */
+  .glass {
+    @apply backdrop-blur-md bg-white/80 dark:bg-black/40;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  /* ✅ Extra danger helpers */
+  .text-gradient-danger {
+    @apply bg-gradient-to-r from-redPro-800 to-redPro-600 bg-clip-text text-transparent;
+  }
+
+  .bg-gradient-danger {
+    @apply bg-gradient-to-r from-redPro-800 to-redPro-700;
+  }
+
+  .badge-danger {
+    @apply border border-redPro-200 bg-redPro-50 text-redPro-800 dark:border-redPro-900/40 dark:bg-redPro-950/40 dark:text-redPro-200;
+  }
+}
+
+/* ✅ Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+/* ✅ Focus visible */
+:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* ✅ Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
