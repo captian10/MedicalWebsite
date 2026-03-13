@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -39,7 +39,8 @@ function safeRedirectPath(input: string | null) {
   return input;
 }
 
-export default function SignInPage() {
+// 1. قمنا بتغيير اسم الدالة الأساسية لتصبح مكون داخلي
+function SignInContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { toast } = useToast();
@@ -260,5 +261,18 @@ export default function SignInPage() {
         </Card>
       </div>
     </div>
+  );
+}
+
+// 2. هذه هي الصفحة الأساسية التي يتم تصديرها الآن وتحتوي على الـ Suspense
+export default function SignInPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-medical-subtle">
+        <Loader2 className="h-8 w-8 animate-spin text-medical-600" />
+      </div>
+    }>
+      <SignInContent />
+    </Suspense>
   );
 }
