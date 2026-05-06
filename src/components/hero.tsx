@@ -58,7 +58,7 @@ export function Hero() {
                 className="border-white/30 text-medical-700 hover:bg-white/10"
                 asChild
               >
-                <Link href="/#about">
+                <Link href="/announcements">
                   <Play className="mr-2 h-5 w-5" />
                   Learn More
                 </Link>

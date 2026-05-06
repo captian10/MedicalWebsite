@@ -103,6 +103,12 @@ export default {
         heading: ["var(--font-outfit)", "system-ui", "sans-serif"],
       },
 
+      backgroundImage: {
+        "gradient-medical": "linear-gradient(to right, #c92a2a, #e03131)",
+        "gradient-medical-subtle":
+          "linear-gradient(135deg, #fff5f5 0%, #ffffff 50%, #ffe3e3 100%)",
+      },
+
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -119,6 +125,10 @@ export default {
           from: { opacity: "0", transform: "translateY(10px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "pulse-dot": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
+        },
       },
 
       animation: {
@@ -126,38 +136,9 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         shimmer: "shimmer 2s infinite",
         fadeIn: "fadeIn 0.5s ease-out forwards",
+        "pulse-dot": "pulse-dot 2s ease-in-out infinite",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-
-
-
-  //  medical: {
-  //         50: "#f6f9ff",
-  //         100: "#edf3ff",
-  //         200: "#d6e5ff",
-  //         300: "#b5ceff",
-  //         400: "#8aadff",
-  //         500: "#5b86ff",
-  //         600: "#3d66f5",
-  //         700: "#2f4fe0",
-  //         800: "#2a41b6",
-  //         900: "#273b8f",
-  //         950: "#172554",
-  //       },
-
-  //       /* ✅ Soft Teal Accent */
-  //       teal: {
-  //         50: "#f1fbfb",
-  //         100: "#daf6f3",
-  //         200: "#b3ece7",
-  //         300: "#7eddd7",
-  //         400: "#42c6c1",
-  //         500: "#1aa8a3",
-  //         600: "#138884",
-  //         700: "#126c69",
-  //         800: "#125757",
-  //         900: "#114848",
-  //         950: "#062a2b",

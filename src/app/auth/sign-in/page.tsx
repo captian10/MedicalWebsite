@@ -6,8 +6,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Eye, EyeOff, Loader2, Stethoscope } from "lucide-react";
-
+import { Eye, EyeOff, Loader2 } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -145,11 +145,18 @@ function SignInContent() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-medical-subtle px-4 py-12">
       <div className="w-full max-w-md space-y-8">
-        {/* Logo */}
-        <div className="text-center">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-medical text-white">
-              <Stethoscope className="h-6 w-6" />
+{/* Logo */}
+        <div className="text-center mb-2">
+          <Link href="/" className="inline-flex items-center gap-3">
+            {/* ✅ Removed the red gradient box and Stethoscope, inserted your colored logo */}
+            <div className="flex items-center justify-center">
+              <Image 
+                src="/images/logo.png" 
+                alt="Mega Medical Academy Logo" 
+                width={48} 
+                height={48} 
+                className="h-12 w-auto object-contain" 
+              />
             </div>
             <span className="text-2xl font-bold text-gradient">Mega Medical Academy</span>
           </Link>

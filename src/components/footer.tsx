@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
-  Stethoscope,
   Mail,
   Phone,
   MapPin,
@@ -46,10 +46,18 @@ export function Footer() {
       <div className="container mx-auto px-4 py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
+          {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-medical text-white shadow-sm">
-                <Stethoscope className="h-5 w-5" />
+            <Link href="/" className="flex items-center gap-3">
+              {/* ✅ Added a white rounded background so the colored logo pops against the dark footer */}
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white p-1.5 shadow-sm">
+                <Image
+                  src="/images/logo.png"
+                  alt="Mega Medical Academy Logo"
+                  width={36}
+                  height={36}
+                  className="h-full w-full object-contain"
+                />
               </div>
               <span className="text-xl font-bold text-white">Mega Medical Academy</span>
             </Link>

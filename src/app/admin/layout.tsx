@@ -11,9 +11,9 @@ import {
   Menu,
   X,
   ChevronLeft,
-  Stethoscope,
   Home,
 } from "lucide-react";
+import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -40,14 +40,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     try {
       const saved = localStorage.getItem("admin_sidebar_collapsed");
       if (saved === "1") setCollapsed(true);
-    } catch {}
+    } catch { }
   }, []);
 
   // ✅ persist collapsed state
   useEffect(() => {
     try {
       localStorage.setItem("admin_sidebar_collapsed", collapsed ? "1" : "0");
-    } catch {}
+    } catch { }
   }, [collapsed]);
 
   // ✅ Close sidebar on route change (mobile)
@@ -106,6 +106,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         )}
       >
         {/* Logo */}
+        {/* Logo */}
         <div className="flex h-16 items-center justify-between px-4 border-b">
           <Link
             href="/admin"
@@ -114,10 +115,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               collapsed && "justify-center w-full"
             )}
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-medical text-white shadow-sm">
-              <Stethoscope className="h-5 w-5" />
+            {/* ✅ Replaced Stethoscope and removed the red background box */}
+            <div className="flex items-center justify-center">
+              <Image
+                src="/images/logo.png"
+                alt="Mega Medical Academy Logo"
+                width={36}
+                height={36}
+                className="h-9 w-auto object-contain"
+              />
             </div>
-            {!collapsed && <span className="font-bold text-gradient">Admin</span>}
+            {!collapsed && <span className="font-bold text-gradient text-lg">Admin</span>}
           </Link>
 
           {/* Collapse button (desktop only) */}

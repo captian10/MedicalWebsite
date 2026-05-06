@@ -8,6 +8,7 @@ export async function updateSession(request: NextRequest) {
 
   // ✅ Prevent crash if env is missing
   if (!url || !anonKey) {
+    console.log("[Middleware] ⚠️ Missing Supabase env vars — passing through");
     return NextResponse.next({ request });
   }
 
@@ -29,12 +30,10 @@ export async function updateSession(request: NextRequest) {
       },
 
       // ✅ queue cookies + apply to current response
-      // تمت إضافة النوع هنا لحل مشكلة Vercel Type Error
       async setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
         cookieQueue.push(...cookiesToSet);
 
         cookiesToSet.forEach(({ name, value, options }) => {
-          // نستخدم as any لتجنب أي تعارض بسيط في الأنواع بين Next.js و Supabase
           response.cookies.set(name, value, options as any);
         });
       },
@@ -46,27 +45,40 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // ✅ Protect Admin routes
-  const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
+  const pathname = request.nextUrl.pathname;
 
-  if (isAdminRoute) {
-    // ✅ Not logged in → redirect to sign-in
+  console.log(`[Middleware] ${pathname} | user=${user?.email ?? "anonymous"}`);
+
+  // ✅ Helper: redirect to sign-in with return URL
+  const redirectToSignIn = () => {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = "/auth/sign-in";
+    redirectUrl.searchParams.set("redirect", pathname + request.nextUrl.search);
+
+    console.log(`[Middleware] 🔒 Redirecting to sign-in (from ${pathname})`);
+
+    response = NextResponse.redirect(redirectUrl);
+
+    // Re-apply queued cookies on redirect response
+    cookieQueue.forEach(({ name, value, options }) => {
+      response.cookies.set(name, value, options as any);
+    });
+
+    return response;
+  };
+
+  // ✅ Protect /profile route
+  if (pathname.startsWith("/profile")) {
     if (!user) {
-      const redirectUrl = request.nextUrl.clone();
-      redirectUrl.pathname = "/auth/sign-in";
-      redirectUrl.searchParams.set(
-        "redirect",
-        request.nextUrl.pathname + request.nextUrl.search
-      );
+      return redirectToSignIn();
+    }
+  }
 
-      response = NextResponse.redirect(redirectUrl);
-
-      // ✅ Re-apply queued cookies on redirect response
-      cookieQueue.forEach(({ name, value, options }) => {
-        response.cookies.set(name, value, options as any);
-      });
-
-      return response;
+  // ✅ Protect Admin routes
+  if (pathname.startsWith("/admin")) {
+    // Not logged in → redirect to sign-in
+    if (!user) {
+      return redirectToSignIn();
     }
 
     // ✅ Check role
@@ -76,14 +88,15 @@ export async function updateSession(request: NextRequest) {
       .eq("user_id", user.id)
       .maybeSingle();
 
-    // ✅ Logged in but not admin → go home
+    // Logged in but not admin → go home
     if (profile?.role !== "admin") {
       const homeUrl = request.nextUrl.clone();
       homeUrl.pathname = "/";
 
+      console.log(`[Middleware] 🚫 Non-admin user accessing ${pathname} — redirecting home`);
+
       response = NextResponse.redirect(homeUrl);
 
-      // ✅ Re-apply queued cookies on redirect response
       cookieQueue.forEach(({ name, value, options }) => {
         response.cookies.set(name, value, options as any);
       });
@@ -92,5 +105,6 @@ export async function updateSession(request: NextRequest) {
     }
   }
 
+  // ✅ Default: pass through — NEVER swallow requests
   return response;
 }
