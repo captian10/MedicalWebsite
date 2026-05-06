@@ -107,9 +107,9 @@
 }
 
 @layer utilities {
-  /* ✅ Default Red Gradient (Main Theme) */
+  /* ✅ Solid Red Text (Replaced Gradient) */
   .text-gradient {
-    @apply bg-gradient-to-r from-redPro-700 to-redPro-500 bg-clip-text text-transparent;
+    @apply text-medical-600 dark:text-medical-500;
   }
 
   .bg-gradient-primary {
