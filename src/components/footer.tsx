@@ -47,7 +47,7 @@ const socialLinks: SocialLink[] = [
 const CONTACT = {
   addressLines: ["123 Medical Center Drive", "Healthcare City, HC 12345"],
   phone: "+447418343611",
-  email: "megamedicalacademy123@gmail.com",
+  email: "megaonlineanesthesia@gmail.com",
 };
 
 export function Footer() {
@@ -57,7 +57,7 @@ export function Footer() {
     <footer className="bg-gradient-to-br from-zinc-950 via-zinc-950 to-zinc-900 text-zinc-300">
       <div className="container mx-auto px-4 py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
-          
+
           {/* Brand */}
           <div id="about" className="space-y-4">
             <Link href="/" className="flex items-center gap-3">
