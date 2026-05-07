@@ -1,13 +1,18 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-    "http://localhost:3000";
+  // ✅ Hardcoded to guarantee search engines never see localhost
+  const baseUrl = "https://megamedicalacademy.com";
 
   return {
     rules: [
       {
+        // 1. Explicitly allow Facebook and WhatsApp to scrape the site
+        userAgent: ["facebookexternalhit", "WhatsApp"],
+        allow: "/",
+      },
+      {
+        // 2. Rules for Google and everyone else
         userAgent: "*",
         allow: "/",
         disallow: ["/admin/", "/auth/", "/api/"],

@@ -2,8 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
+// ✅ Hardcoded fallback to your production domain for perfect SEO
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "http://localhost:3000";
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://megamedicalacademy.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
       "High-quality anesthesiology education for doctors and residents. Explore lectures in anesthesia, airway management, ICU care, and perioperative safety.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/logo.png", // ✅ Changed from /og-image.jpg to your actual logo
         width: 1200,
         height: 630,
         alt: "Mega Medical Academy - Anesthesiology Education & Training",
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
     title: "Mega Medical Academy | Anesthesiology Education & Training",
     description:
       "Advanced anesthesiology education covering anesthesia techniques, airway management, ICU care, pain management, and perioperative safety.",
-    images: ["/og-image.jpg"],
+    images: ["/images/logo.png"], // ✅ Changed from /og-image.jpg to your actual logo
   },
   robots: {
     index: true,
