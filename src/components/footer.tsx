@@ -206,18 +206,13 @@ export function Footer() {
           </p>
 
           <div className="flex gap-6">
-            <Link
-              href="/privacy"
-              className="text-sm text-zinc-500 transition-colors hover:text-zinc-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-medical-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 rounded"
-            >
+            <Link href="/privacy" className="hover:text-medical-600 dark:hover:text-medical-400 transition-colors">
               Privacy Policy
             </Link>
-            <Link
-              href="/terms"
-              className="text-sm text-zinc-500 transition-colors hover:text-zinc-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-medical-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 rounded"
-            >
+            <Link href="/terms" className="hover:text-medical-600 dark:hover:text-medical-400 transition-colors">
               Terms of Service
             </Link>
+
           </div>
         </div>
       </div>
