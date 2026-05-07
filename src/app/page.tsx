@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
+import { NewsletterSection } from "@/components/newsletter-section";
 import { AnnouncementCard } from "@/components/announcement-card";
 import { LectureCard } from "@/components/lecture-card";
 import { Button } from "@/components/ui/button";
@@ -235,6 +236,7 @@ export default function HomePage() {
           </div>
         </section>
 
+
         {/* Lectures Section */}
         <section className="py-20 relative" id="lectures">
           {/* Subtle background pattern */}
@@ -310,6 +312,9 @@ export default function HomePage() {
           </div>
         </section>
       </main>
+
+      {/* Newsletter Section */}
+      <NewsletterSection />
 
       <Footer />
     </>

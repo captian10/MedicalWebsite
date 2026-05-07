@@ -26,8 +26,8 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 const quickLinks = [
   { name: "Home", href: "/" },
   { name: "Lectures", href: "/lectures" },
-  { name: "About", href: "/#about" },
-  { name: "Contact", href: "/#contact" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "https://wa.me/447418343611" },
 ];
 
 type SocialLink = {

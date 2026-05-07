@@ -23,6 +23,8 @@ import Image from "next/image";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Lectures", href: "/lectures" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "https://wa.me/447418343611", external: true },
 ];
 
 interface UserProfile {
@@ -184,18 +186,33 @@ export function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-medical-600",
-                pathname === item.href ? "text-medical-600" : "text-muted-foreground"
-              )}
-            >
-              {item.name}
-            </Link>
-          ))}
+          {navigation.map((item) => {
+            const isExternal = "external" in item && item.external;
+            const linkClasses = cn(
+              "text-sm font-medium transition-colors hover:text-medical-600",
+              pathname === item.href ? "text-medical-600" : "text-muted-foreground"
+            );
+
+            return isExternal ? (
+              <a
+                key={item.name}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClasses}
+              >
+                {item.name}
+              </a>
+            ) : (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={linkClasses}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Right side */}
@@ -294,20 +311,35 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="md:hidden border-t bg-background/95 backdrop-blur">
           <div className="container mx-auto px-4 py-4 space-y-4">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "block text-base font-medium py-2 transition-colors",
-                  pathname === item.href
-                    ? "text-medical-600"
-                    : "text-muted-foreground hover:text-medical-600"
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const isExternal = "external" in item && item.external;
+              const linkClasses = cn(
+                "block text-base font-medium py-2 transition-colors",
+                pathname === item.href
+                  ? "text-medical-600"
+                  : "text-muted-foreground hover:text-medical-600"
+              );
+
+              return isExternal ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClasses}
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={linkClasses}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
 
             {isAdmin && (
               <Link href="/admin" className="block text-base font-medium py-2 text-medical-600">
