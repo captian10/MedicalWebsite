@@ -80,7 +80,7 @@ export function Hero() {
             </div>
 
             {/* Join as a Lecturer — WhatsApp CTA */}
-            <div className="pt-2">
+            {/* <div className="pt-2">
               <Button
                 size="lg"
                 className="bg-[#25D366] hover:bg-[#1ebe5d] text-white shadow-lg hover:shadow-xl transition-all duration-300 gap-2"
@@ -97,7 +97,7 @@ export function Hero() {
                 </a>
               </Button>
               <p className="text-xs text-white/50 mt-2">Share your expertise • Help fellow doctors</p>
-            </div>
+            </div> */}
 
             {/* Stats */}
             {/* <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/20">
