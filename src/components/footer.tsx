@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { VisitorCounter } from "./visitor-counter";
 
 // ✅ Custom SVG for the official WhatsApp Icon
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -115,6 +116,10 @@ export function Footer() {
                 );
               })}
             </div>
+
+            {/* ✅ Live Visitor Counter Placed Here */}
+            <VisitorCounter />
+
           </div>
 
           {/* Quick Links */}
